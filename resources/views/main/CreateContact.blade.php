@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container">
-    <h1>Criar</h1>
+    <h1>Adiconar Contato</h1>
    <a class="btn btn-light" href="{{route('main.index')}}">Ver Usuários</a>
 </div>
 

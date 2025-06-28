@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-    <h1>Listar</h1>
+    <h1>Visualizar</h1>
  <a class="btn btn-light" href="{{route('main.index')}}">Ver Usuários</a>
 </div>
 </div>
