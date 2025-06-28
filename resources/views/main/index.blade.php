@@ -36,20 +36,37 @@
             <th>CONTATO</th>
             <th>EMAIL</th>
             <th>CRIADO EM</th>
+            <th>ATUALIZADO EM</th>
+            <th>DELETADO EM</th>
             <th>AÇÕES</th>
         </tr>
     </thead>
     <tbody>
-      
   <!-- apresento os registros -->
   @forelse($contacts as $listContact)
         <tr>
+            
             <td>{{ $listContact->id }}</td>
             <td>{{ $listContact->nome }}</td>
             <td>{{ $listContact->contato }}</td>
             <td>{{ $listContact->email }}</td>
             <td>
                 {{ \Carbon\Carbon::parse($listContact->created_at)->tz('America/Sao_Paulo')->format('d/m/Y') }}
+            </td>
+            <td> @if($listContact->atualizado != 0)
+             
+              {{ \Carbon\Carbon::parse($listContact->atualizado)->tz('America/Sao_Paulo')->format('d/m/Y') }}
+              @else
+            
+              Sem Atualização
+              @endif
+            </td>
+            <td>
+                 @if($listContact->info != 0)
+                       {{ \Carbon\Carbon::parse($listContact->info)->tz('America/Sao_Paulo')->format('d/m/Y') }}
+                    @else
+                Contato não deletado
+                    @endif
             </td>
             <td>
                 @if($listContact->info != 0)
@@ -64,7 +81,7 @@
                     </form>
                 @else
                     {{-- Ações se não estiver deletado --}}
-                    {{ \Carbon\Carbon::parse($listContact->info)->tz('America/Sao_Paulo')->format('d/m/Y') }}<br>
+                   <br>
 
                     <a href="{{ route('main.preview', ['dados' => $listContact->id]) }}" class="btn btn-primary btn-sm">Visualizar</a>
                     <a href="{{ route('main.edit', ['dados' => $listContact->id]) }}" class="btn btn-warning btn-sm">Editar</a>

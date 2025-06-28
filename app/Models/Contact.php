@@ -23,7 +23,8 @@ class Contact extends Model
 
     public static function getAllListContato()
     {
-        $return = DB::table('Contatcs')->select('id','nome', 'contato', 'email','created_at', 
+        $return = DB::table('Contatcs')->select('id','nome', 'contato', 'email','created_at',
+        DB::raw("IFNULL(updated_at, 0) as atualizado"),
         DB::raw("IFNULL(deleted_at, 0) as info"))->get();
         return $return->isEmpty() ? false : $return;
     }
