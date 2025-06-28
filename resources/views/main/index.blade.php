@@ -53,6 +53,7 @@
             </td>
             <td>
                 @if($listContact->info != 0)
+                   <a href="{{ route('main.preview', ['dados' => $listContact->id]) }}" class="btn btn-primary btn-sm">Visualizar</a>
                     {{-- Botão para reativar --}}
                     <form action="{{ route('main.ativeContact', ['id' => $listContact->id]) }}" method="POST" style="display:inline-block;">
                         @csrf

@@ -22,6 +22,8 @@
                 <th>EMAIL</th>
                 <th>CRIADO EM</th>
                 <th>Atualizado EM</th>
+                <th>Deletado</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +34,28 @@
                 <td>{{ $dados->email }}</td>
                 <td>{{ \Carbon\Carbon::parse($dados->created_at)->tz('America/Sao_Paulo')->format('d/m/Y')  }}</td>
                 <td>{{ \Carbon\Carbon::parse($dados->updated_at)->tz('America/Sao_Paulo')->format('d/m/Y')  }}</td>
+                <td>{{ \Carbon\Carbon::parse($dados->updated_at)->tz('America/Sao_Paulo')->format('d/m/Y')  }}</td>
+                <td>
+                      <form action="{{ route('main.ativeContact', ['id' => $dados->id ]) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja Ativar?')" class="btn btn-success btn-sm">
+                            Ativar
+                        </button>
+                    </form>
+                </td>
+                <td>
+                      <a href="{{ route('main.preview', ['dados' => $dados->id]) }}" class="btn btn-primary btn-sm">Visualizar</a>
+                    <a href="{{ route('main.edit', ['dados' => $dados->id]) }}" class="btn btn-warning btn-sm">Editar</a>
+
+                    <form action="{{ route('main.delete', ['dados' => $dados->id]) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja Deletar?')" class="btn btn-danger btn-sm">
+                            Deletar
+                        </button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>

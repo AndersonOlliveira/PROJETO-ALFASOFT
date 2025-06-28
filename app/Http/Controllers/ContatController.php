@@ -44,24 +44,29 @@ class ContatController extends Controller
       }
    }
 
-   public function preview(Contact $dados)
+   public function preview($dados)
     { 
 
-      return view('main.VisualizarContact', ['dados'=> $dados]);
+        $result = Contact::withTrashed()->find($dados);
+
+    
+      return view('main.VisualizarContact', ['dados'=> $result]);
 
    }
-   public function editar(Contact $dados)
+   public function editar($dados)
    {
- 
-      return view('main.EditeContact', ['dados'=> $dados]);
+     $result = Contact::withTrashed()->find($dados);
+    
+     return view('main.EditeContact', ['dados'=> $result]);
    }
  
    public function update(EditeRequest $request, Contact $dados)
    { 
 
       
-    $resultEmail = Contact::getMailUser($request->emailInput,$dados->id);
-           $resultContat = Contact::getContactUser($request->contatoInput,$dados->id);
+          $resultEmail = Contact::getMailUser($request->emailInput,$dados->id);
+         
+          $resultContat = Contact::getContactUser($request->contatoInput,$dados->id);
 
      
            if($resultEmail){
